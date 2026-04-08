@@ -8,10 +8,10 @@ void verEntero(int* p) {
 void verBytes(char* p, int size) {
     std::cout << "Bytes:\n";
     for (int i = 0; i < size; i++) {
-        std::cout << (int)(p + i) << " ";
+        std::cout << (int)*(p + i) << " ";
     }
     std::cout << std::endl;
-    std::cout << "Direccion char: " << (void)p << std::endl;
+    std::cout << "Direccion char: " << (void*)p << std::endl;
 }
 
 int main() {
@@ -20,8 +20,8 @@ int main() {
     std::cout << "Ingrese un float: ";
     std::cin >> num;
 
-    int pInt = (int)&num;
-    char pChar = (char*)&num;
+    int* pInt = (int*)&num;
+    char* pChar = (char*)&num;
 
     std::cout << "Direccion original: " << &num << std::endl;
 
