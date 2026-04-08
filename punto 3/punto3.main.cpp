@@ -6,11 +6,11 @@ int mayor(int* arr, int n) {
         return 0;
     }
 
-    int max = arr;
+    int max = *arr;
 
     for (int i = 1; i < n; i++) {
-        if ((arr + i) > max) {
-            max = (arr + i);
+        if (*(arr + i) > max) {
+            max = (*arr + i);
         }
     }
 
@@ -23,7 +23,7 @@ int main() {
 
     if (n <= 0) return 0;
 
-    int arr = new int[n];
+    int* arr = new int[n];
 
     for (int i = 0; i < n; i++) {
         std::cin >> *(arr + i);
