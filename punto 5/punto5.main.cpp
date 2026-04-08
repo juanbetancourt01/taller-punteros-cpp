@@ -1,32 +1,46 @@
 #include <iostream>
 
-void verEntero(int* p) {
-    std::cout << "Interpretacion como int: " << p << std::endl;
-    std::cout << "Direccion (int): " << p << std::endl;
+void llenar(int matriz, int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            std::cout << "Elemento [" << i << "][" << j << "]: ";
+            std::cin >> ((matriz + i) + j);
+        }
+    }
 }
 
-void verBytes(char* p, int size) {
-    std::cout << "Bytes en memoria:\n";
-    for (int i = 0; i < size; i++) {
-        std::cout << (int)(p + i) << " ";
+void sumaFilas(int matriz, int filas, int columnas) {
+    for (int i = 0; i < filas; i++) {
+        int suma = 0;
+        for (int j = 0; j < columnas; j++) {
+            suma += ((matriz + i) + j);
+        }
+        std::cout << "Suma fila " << i << ": " << suma << std::endl;
     }
-    std::cout << std::endl;
-    std::cout << "Direccion (char): " << (void)p << std::endl;
 }
 
 int main() {
-    float num;
+    int filas, columnas;
 
-    std::cout << "Ingrese un float: ";
-    std::cin >> num;
+    std::cout << "Filas: ";
+    std::cin >> filas;
+    std::cout << "Columnas: ";
+    std::cin >> columnas;
 
-    int pInt = (int)&num;
-    char pChar = (char*)&num;
+    int** matriz = new int*[filas];
 
-    std::cout << "Direccion original: " << &num << std::endl;
+    for (int i = 0; i < filas; i++) {
+        (matriz + i) = new int[columnas];
+    }
 
-    verEntero(pInt);
-    verBytes(pChar, sizeof(float));
+    llenar(matriz, filas, columnas);
+    sumaFilas(matriz, filas, columnas);
+
+    // Liberar memoria
+    for (int i = 0; i < filas; i++) {
+        delete[](matriz + i);
+    }
+    delete[] matriz;
 
     return 0;
 }
